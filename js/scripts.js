@@ -40,17 +40,25 @@ $(document).ready(function() {
 
   $("#roll").click(function() {
     if (player1.turn === true) {
-      player1.roll();
-      player1.takeTurn();
-      player2.takeTurn();
-      $("#rolled-number").text(player1.currentScore);
-      $(".p1-total-score").text(player1.scoreTotal);
+      if (player1.scoreTotal >= 100 || player2.scoreTotal >= 100) {
+        $("button").attr("readonly", true);
+      } else {
+        player1.roll();
+        player1.takeTurn();
+        player2.takeTurn();
+        $("#rolled-number").text(player1.currentScore);
+        $(".p1-total-score").text(player1.scoreTotal);
+      }
     } else {
-      player2.roll();
-      player1.takeTurn();
-      player2.takeTurn();
-      $("#rolled-number").text(player2.currentScore);
-      $(".p2-total-score").text(player2.scoreTotal);
+      if (player2.scoreTotal >= 100 || player1.scoreTotal >= 100) {
+        $("button").attr("readonly", true);
+      } else {
+        player2.roll();
+        player1.takeTurn();
+        player2.takeTurn();
+        $("#rolled-number").text(player2.currentScore);
+        $(".p2-total-score").text(player2.scoreTotal);
+      }
     }
 
     console.log(player1.turn);
