@@ -6,3 +6,10 @@ body {
   color: white;
   padding-left: 15px;
 }
+.col-xs-4 {
+  text-align: center;
+}
+
+.game {
+  display: none;
+}
