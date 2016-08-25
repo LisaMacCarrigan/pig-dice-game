@@ -20,10 +20,6 @@ Player.prototype.roll = function() {
   this.currentScore = rand;
 };
 
-Player.prototype.turnTotal = function(rollPoints) {
-  this.currentScore += rollPoints
-}
-
 Player.prototype.addPoints = function(rollPoints) {
   this.scoreTotal += rollPoints;
 };
