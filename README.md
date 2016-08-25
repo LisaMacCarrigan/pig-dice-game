@@ -22,13 +22,15 @@ This is a two player game of Pig dice. Each turn, a player repeatedly rolls a di
     * Example Input: Rolls '1'
     * Example Output: Current Player's score for that turn is 0, and it becomes the other Player's turn.
 
-#### 3. If current Player rolls a number between '2' and '6', Player is asked to 'hold' or 'roll again'.
+#### 3. If current Player rolls a number between '2' and '6', Player has the option to 'hold' or 'roll' again.
 
 * Example Input: Rolls '2'
-* Example Output: Current Player's score for that turn is 2, and they are prompted to roll again or hold.
+* Example Output: Current Player's score for that turn is 2, and they can either hold or roll again.
 
-#### 4.
+#### 4. The first player to hit greater than or equal to 100 points wins.
 
+* Example Input: The number of points a user has added to their Total Score reaches 100 or greater.
+* Example Output: "Looks like we have a winner!"
 
 ## Setup/Installation Requirements
 

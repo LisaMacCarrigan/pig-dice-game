@@ -20,17 +20,25 @@ Player.prototype.roll = function() {
   this.currentScore = rand;
 };
 
-Player.prototype.scorePoints = function(rollPoints) {
+Player.prototype.turnTotal = function(rollPoints) {
+  this.currentScore += rollPoints
+}
+
+Player.prototype.addPoints = function(rollPoints) {
   this.scoreTotal += rollPoints;
 };
 
 var player1 = new Player(true);
 var player2 = new Player(false);
 
+var totalRoll;
+
 // User Interface Logic
 $(document).ready(function() {
   var playerOneName;
   var playerTwoName;
+
+  totalRoll = parseInt($("#rolled-total").text());
 
   $("#signup-form").submit(function(event){
     event.preventDefault();
@@ -54,12 +62,18 @@ $(document).ready(function() {
         if (player1.currentScore === 1) {
           player1.takeTurn();
           player2.takeTurn();
+          totalRoll = 0;
+          $("#hold").attr("disabled", true).removeClass("btn-danger");
+          $("#rolled-total").text("0");
           $("#rolled-number").text(player1.currentScore);
-          $(this).addClass("roll-again").text("Roll");
+          $(this).text("Roll");
           $("#player-msg").text(playerTwoName + ", GO!");
         }
         else {
+          totalRoll += player1.currentScore;
+          $("#hold").attr("disabled", false).addClass("btn-danger");
           $("#rolled-number").text(player1.currentScore);
+          $("#rolled-total").text(totalRoll);
           $(this).addClass("roll-again").text("Roll Again?");
         }
       }
@@ -73,12 +87,19 @@ $(document).ready(function() {
         if (player2.currentScore === 1) {
           player1.takeTurn();
           player2.takeTurn();
+          totalRoll = 0;
+          $("#hold").attr("disabled", true).removeClass("btn-danger");
+          $("#rolled-total").text("0");
           $("#rolled-number").text(player2.currentScore);
           $(this).removeClass("roll-again").text("Roll");
+          totalRoll = 0;
           $("#player-msg").text(playerOneName + ", GO!");
         }
         else {
+          totalRoll += player2.currentScore;
+          $("#hold").attr("disabled", false).addClass("btn-danger");
           $(this).addClass("roll-again").text("Roll Again?");
+          $("#rolled-total").text(totalRoll);
           $("#rolled-number").text(player2.currentScore);
         }
       }
@@ -86,19 +107,24 @@ $(document).ready(function() {
   }); // end click
 
   $("#hold").click(function() {
-    var currentRole = parseInt($("#rolled-number").text());
     if (player1.turn === true) {
       player1.takeTurn();
       player2.takeTurn();
-      player1.scorePoints(currentRole);
+      player1.addPoints(totalRoll);
+      totalRoll = 0;
+      $(this).attr("disabled", true).removeClass("btn-danger");
+      $("#rolled-total").text("0");
       $(".p1-total-score").text(player1.scoreTotal);
-      $("#roll").removeClass("roll-again").text("Roll");
+      $("#roll").text("Roll");
       $("#player-msg").text(playerTwoName + ", your turn!");
     }
     else {
       player1.takeTurn();
       player2.takeTurn();
-      player2.scorePoints(currentRole);
+      player2.addPoints(totalRoll);
+      totalRoll = 0;
+      $(this).attr("disabled", true).removeClass("btn-danger");
+      $("#rolled-total").text("0");
       $(".p2-total-score").text(player2.scoreTotal);
       $("#roll").removeClass("roll-again").text("Roll");
       $("#player-msg").text(playerOneName + ", your turn!");

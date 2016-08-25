@@ -1,11 +1,24 @@
 body {
   padding-top: 100px;
+  font-family: 'Raleway', sans-serif;
+}
+
+h3 {
+  font-family: 'Fredericka the Great', sans-serif;
+  color: darkred;
 }
 
 .navbar h3 {
   color: white;
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 40px;
   padding-left: 15px;
 }
+  @media screen and (max-width: 320px) {
+    .navbar h3 {
+      font-size: 35px;
+    }
+  }
 .col-xs-4 {
   text-align: center;
 }
