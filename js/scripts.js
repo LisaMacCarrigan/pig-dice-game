@@ -40,6 +40,12 @@ $(document).ready(function() {
     event.preventDefault();
     playerOneName = $("#player-one-signup").val();
     playerTwoName = $("#player-two-signup").val();
+
+    if (playerOneName == "" || playerTwoName == "") {
+      alert("Please enter a name for each player");
+      return;
+    }
+
     $(".player-setup").slideUp(500);
     $("#player-one-name").text(playerOneName);
     $("#player-two-name").text(playerTwoName);
